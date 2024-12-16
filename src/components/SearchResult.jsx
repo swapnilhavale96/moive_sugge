@@ -1,17 +1,44 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { NavbarDemo } from "./NavbarDemo";
 import { FocusCardsDemo } from "./FocusCardsDemo";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { motion } from "framer-motion";
+import { AuroraBackground } from "./ui/aurora-background";
 
-export function SearchResult({ API }) {
+export function SearchResult(props) {
+  const location = useLocation();
+  const query = location.state?.query || ""; // Get the input passed from HomePage
+
   const [results, setResults] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
-  const [hasMore, setHasMore] = useState(true); // Track if more results can be fetched
-  const [seenImageUrls, setSeenImageUrls] = useState(new Set()); // Track seen image URLs to filter duplicates
+  const [seenUrls, setSeenUrls] = useState(new Set()); // Persist unique image URLs across fetches
 
+  // Function to process and filter results
+  const processResults = (data) => {
+    const uniqueResults = [];
+
+    data.forEach((item) => {
+      // Skip results with "blank.gif" as image_url
+      if (item.image_url === "https://cdn.watchmode.com/posters/blank.gif")
+        return;
+
+      // Skip duplicate image URLs
+      if (!seenUrls.has(item.image_url)) {
+        seenUrls.add(item.image_url); // Add to the seen set
+        uniqueResults.push(item);
+      }
+    });
+
+    return uniqueResults;
+  };
+
+  // Function to fetch data
   const fetchData = async () => {
-    const url = `https://api.watchmode.com/v1/autocomplete-search/?apiKey=${API}&search_value=Breaking%20bad&search_type=1`;
+    const url = `https://api.watchmode.com/v1/autocomplete-search/?apiKey=${
+      props.API
+    }&search_value=${encodeURIComponent(query)}&search_type=2`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -19,92 +46,76 @@ export function SearchResult({ API }) {
         return;
       }
       const json = await response.json();
+      console.log("API Response:", json);
 
       if (json.results) {
-        const newResults = json.results.filter((result) => {
-          // Skip result if image_url is "https://cdn.watchmode.com/posters/blank.gif"
-          if (
-            result.image_url === "https://cdn.watchmode.com/posters/blank.gif"
-          ) {
-            return false;
-          }
-
-          // Skip duplicate image_urls
-          if (seenImageUrls.has(result.image_url)) {
-            return false;
-          }
-
-          // Mark image_url as seen
-          seenImageUrls.add(result.image_url);
-
-          return true; // Keep the result
-        });
-
-        setResults((prev) => [...prev, ...newResults]); // Append new results
-        setTotalResults(json.totalResults || newResults.length);
-
-        // If all results are loaded, stop fetching
-        if (results.length + newResults.length >= json.totalResults) {
-          setHasMore(false);
-        }
+        const filteredResults = processResults(json.results);
+        setResults((prev) => [...prev, ...filteredResults]); // Append filtered results
+        setTotalResults(json.totalResults || filteredResults.length);
       } else {
-        console.warn("No results found in the API response.");
-        setHasMore(false); // No more results
+        console.warn("No results in the API response");
       }
     } catch (error) {
-      console.error("Fetch error:", error);
-      setHasMore(false); // Stop infinite scroll on error
+      console.error("Fetch Error:", error);
     }
   };
 
   useEffect(() => {
-    fetchData(); // Initial fetch on component mount
-  }, []);
+    if (query) {
+      fetchData();
+    }
+  }, [query]);
 
   return (
-    <div className="h-screen w-screen bg-neutral-950 flex flex-col items-center justify-center antialiased overflow-auto">
-      <div className="p-4">
+    <>
+      <AuroraBackground>
         <NavbarDemo />
-      </div>
-      <div className="w-full h-full py-20">
-        <h2 className="max-w-7xl mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200">
-          Search Results
-        </h2>
-        <InfiniteScroll
-          dataLength={results.length}
-          next={fetchData}
-          hasMore={hasMore} // Controlled by the state
-          loader={
-            <h4 className="text-center text-white">Loading more results...</h4>
-          }
-          endMessage={
-            <p className="text-center text-white mt-10">
-              You have seen all the results!
-            </p>
-          }
-        >
-          {results.length > 0 ? (
-            results.map((element, index) => (
-              <div className="p-10" key={index}>
-                <FocusCardsDemo
-                  title={
-                    typeof element.name === "string"
-                      ? element.name
-                      : "Unknown Title"
-                  }
-                  imgUrl={
-                    typeof element.image_url === "string"
-                      ? element.image_url
-                      : ""
-                  }
-                />
-              </div>
-            ))
-          ) : (
-            <p className="text-center text-white mt-10">No results found.</p>
-          )}
-        </InfiniteScroll>
-      </div>
-    </div>
+        <div className="h-screen w-screen relative flex flex-col items-center justify-center antialiased overflow-auto p-10">
+          <div className="w-full h-full py-20">
+            <h2 className="max-w-7xl mx-auto text-center md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
+              Search Results for "{query}"
+            </h2>
+            <InfiniteScroll
+              dataLength={results.length}
+              next={fetchData}
+              hasMore={results.length < totalResults}
+              loader={
+                <h4 className="text-center text-white">
+                  Loading more results...
+                </h4>
+              }
+              endMessage={
+                <p className="text-center text-white mt-10">
+                  You have seen all the results!
+                </p>
+              }
+            >
+              {results.length > 0 ? (
+                results.map((element, index) => (
+                  <div className="p-10" key={index}>
+                    <FocusCardsDemo
+                      title={
+                        typeof element.name === "string"
+                          ? element.name
+                          : "Unknown Title"
+                      }
+                      imgUrl={
+                        typeof element.image_url === "string"
+                          ? element.image_url
+                          : ""
+                      }
+                    />
+                  </div>
+                ))
+              ) : (
+                <p className="text-center text-white mt-10 p-10">
+                  No results found.
+                </p>
+              )}
+            </InfiniteScroll>
+          </div>
+        </div>
+      </AuroraBackground>
+    </>
   );
 }
