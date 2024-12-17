@@ -91,22 +91,9 @@ export function SearchResult(props) {
               }
             >
               {results.length > 0 ? (
-                results.map((element, index) => (
-                  <div className="p-10" key={index}>
-                    <FocusCardsDemo
-                      title={
-                        typeof element.name === "string"
-                          ? element.name
-                          : "Unknown Title"
-                      }
-                      imgUrl={
-                        typeof element.image_url === "string"
-                          ? element.image_url
-                          : ""
-                      }
-                    />
-                  </div>
-                ))
+                <div className="p-10">
+                  <FocusCardsDemo results={results} />
+                </div>
               ) : (
                 <p className="text-center text-white mt-10 p-10">
                   No results found.
