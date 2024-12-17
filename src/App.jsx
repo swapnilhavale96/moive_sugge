@@ -2,7 +2,7 @@ import "./App.css";
 import { CreditsPage } from "./components/CreditsPage";
 import { HomePage } from "./components/HomePage";
 import { SearchResult } from "./components/SearchResult";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { VideoPlayer } from "./components/VideoPlayer";
 
 function App() {

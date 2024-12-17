@@ -32,12 +32,6 @@ function Navbar({ className, setActive, active }) {
         >
           About
         </Link>
-        <Link
-          to="/video-player"
-          className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
-        >
-          VideoPlayer
-        </Link>
       </Menu>
     </div>
   );

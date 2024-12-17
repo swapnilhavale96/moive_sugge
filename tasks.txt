@@ -1,10 +1,10 @@
 1. Teach code - Done
-2. Search result beautify
+2. Search result beautify - Done
 3. Home Search Bar Query - Done
 4. Video Player
 5. Navbar - Add two feature - Done
 6. Movie and Series player
 7. if possible, plot-based search
-8. HD posters from TMDB
+8. HD posters from TMDB - Done
 9. About page - Done
-10. Add our pic on About
+10. Add our pic on About - Done
