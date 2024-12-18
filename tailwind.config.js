@@ -1,5 +1,4 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-
 const colors = require("tailwindcss/colors");
 const {
   default: flattenColorPalette,
@@ -26,6 +25,8 @@ module.exports = {
         fourth: "moveHorizontal 40s ease infinite",
         fifth: "moveInCircle 20s ease infinite",
         shimmer: "shimmer 2s linear infinite",
+        scroll:
+          "scroll var(--animation-duration, 25s) var(--animation-direction, forwards) linear infinite",
       },
       keyframes: {
         moveHorizontal: {
@@ -75,6 +76,11 @@ module.exports = {
           },
           to: {
             backgroundPosition: "-200% 0",
+          },
+        },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
           },
         },
       },

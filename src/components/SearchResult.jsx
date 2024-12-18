@@ -84,11 +84,11 @@ export function SearchResult(props) {
                   Loading more results...
                 </h4>
               }
-              endMessage={
-                <p className="text-center text-white mt-10">
-                  You have seen all the results!
-                </p>
-              }
+              // endMessage={
+              //   <p className="text-center text-white mt-10">
+              //     You have seen all the results!
+              //   </p>
+              // }
             >
               {results.length > 0 ? (
                 <div className="p-10">
