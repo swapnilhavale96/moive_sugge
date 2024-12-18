@@ -23,7 +23,7 @@ export function CreditsPage() {
         "I love turning ideas into reality and making life just a bit easier, one line of code at a time. Leveraging my experience in Python, Full-Stack Development and IoT, I built this website to offer entertainment without the hassle.",
       name: "Atharv Chinchkar",
       designation: "Student at MITWPU",
-      src: "/public/Atharv.png",
+      src: Atharv,
       instagram: "https://www.instagram.com/atharvchinckar",
       linkedin: "https://www.linkedin.com/in/atharvchinckar",
       github: "https://github.com/atharvchinckar",
