@@ -2,6 +2,7 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { FaInstagram, FaLinkedin, FaGithub, FaGlobe } from "react-icons/fa";
 
 export const AnimatedTestimonials = ({ testimonials, autoplay = false }) => {
   const [active, setActive] = useState(0);
@@ -28,9 +29,10 @@ export const AnimatedTestimonials = ({ testimonials, autoplay = false }) => {
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
   };
+
   return (
-    <div className="bg-neutral-950 max-w-sm md:max-w-4xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-12 py-(-2)">
-      <div className="relative grid grid-cols-1 md:grid-cols-2  gap-20">
+    <div className="bg-neutral-950 max-w-sm md:max-w-4xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-12 py-0">
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-20">
         <div>
           <div className="relative h-80 w-full">
             <AnimatePresence>
@@ -98,13 +100,13 @@ export const AnimatedTestimonials = ({ testimonials, autoplay = false }) => {
               ease: "easeInOut",
             }}
           >
-            <h3 className="text-2xl font-bold dark:text-white text-black">
+            <h3 className="text-2xl font-bold text-white">
               {testimonials[active].name}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-neutral-500">
+            <p className="text-sm text-neutral-500">
               {testimonials[active].designation}
             </p>
-            <motion.p className="text-lg text-gray-500 mt-8 dark:text-neutral-300">
+            <motion.p className="text-lg text-neutral-300 mt-8">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -129,21 +131,48 @@ export const AnimatedTestimonials = ({ testimonials, autoplay = false }) => {
                 </motion.span>
               ))}
             </motion.p>
+            <div className="flex gap-4 mt-4">
+              <a
+                href={testimonials[active].instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-400 hover:text-pink-500"
+              >
+                <FaInstagram size={24} />
+              </a>
+              <a
+                href={testimonials[active].linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-400 hover:text-blue-500"
+              >
+                <FaLinkedin size={24} />
+              </a>
+              <a
+                href={testimonials[active].github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-400 hover:text-gray-200"
+              >
+                <FaGithub size={24} />
+              </a>
+            </div>
           </motion.div>
-          <div className="flex gap-4 pt-12 md:pt-0">
+          <br />
+          {/* <div className="flex gap-4 pt-12 md:pt-0">
             <button
               onClick={handlePrev}
-              className="h-7 w-7 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center group/button"
+              className="h-7 w-7 rounded-full bg-neutral-800 flex items-center justify-center group/button"
             >
-              <IconArrowLeft className="h-5 w-5 text-black dark:text-neutral-400 group-hover/button:rotate-12 transition-transform duration-300" />
+              <IconArrowLeft className="h-5 w-5 text-neutral-400 group-hover/button:rotate-12 transition-transform duration-300" />
             </button>
             <button
               onClick={handleNext}
-              className="h-7 w-7 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center group/button"
+              className="h-7 w-7 rounded-full bg-neutral-800 flex items-center justify-center group/button"
             >
-              <IconArrowRight className="h-5 w-5 text-black dark:text-neutral-400 group-hover/button:-rotate-12 transition-transform duration-300" />
+              <IconArrowRight className="h-5 w-5 text-neutral-400 group-hover/button:-rotate-12 transition-transform duration-300" />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

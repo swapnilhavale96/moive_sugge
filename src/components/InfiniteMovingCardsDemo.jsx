@@ -6,7 +6,7 @@ import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
 export function InfiniteMovingCardsDemo() {
   return (
     <div>
-      <InfiniteMovingCards items={moviePosters} direction="left" speed="slow" />
+      <InfiniteMovingCards items={moviePosters} direction="left" speed="fast" />
     </div>
   );
 }
