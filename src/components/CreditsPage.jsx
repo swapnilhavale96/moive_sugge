@@ -4,13 +4,14 @@ import { AnimatedTestimonials } from "./ui/animated-testimonials";
 import React from "react";
 
 export function CreditsPage() {
+  const imgUrl = new URL("./", import.meta.url).href;
   const testimonials = [
     {
       quote:
         "I enjoy tackling complex challenges across web development. With experience in MERN stack, I dive into projects always pushing my limits. Whether it's building intelligent solutions or optimizing data flows, I'm constantly seeking growth and innovative ways to advance my skills.",
       name: "Aditya Jain",
       designation: "Student at MITWPU",
-      src: "/src/assets/Aditya.png",
+      src: "/public/Aditya.png",
       instagram: "https://www.instagram.com/theadityajain_",
       linkedin: "https://www.linkedin.com/in/Theadityajain2010",
       github: "https://github.com/TheAdityaJain",
@@ -20,7 +21,7 @@ export function CreditsPage() {
         "I love turning ideas into reality and making life just a bit easier, one line of code at a time. Leveraging my experience in Python, Full-Stack Development and IoT, I built this website to offer entertainment without the hassle.",
       name: "Atharv Chinchkar",
       designation: "Student at MITWPU",
-      src: "/src/assets/Atharv.png",
+      src: "/public/Atharv.png",
       instagram: "https://www.instagram.com/atharvchinckar",
       linkedin: "https://www.linkedin.com/in/atharvchinckar",
       github: "https://github.com/atharvchinckar",
