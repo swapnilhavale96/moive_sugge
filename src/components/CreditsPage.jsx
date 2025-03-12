@@ -4,29 +4,29 @@ import { AnimatedTestimonials } from "./ui/animated-testimonials";
 import React from "react";
 
 export function CreditsPage() {
-  const Aditya = new URL("/public/Aditya.png", import.meta.url).href;
-  const Atharv = new URL("/public/Atharv.png", import.meta.url).href;
+  const Shravani  = new URL("/Users/swapnilhavale/Desktop/shri/movie/public/IMG_2432.png", import.meta.url).href;
+  const Rajlaxmi = new URL("/Users/swapnilhavale/Desktop/shri/movie/public/rajl.png", import.meta.url).href;
 
   const testimonials = [
     {
       quote:
         "I enjoy tackling complex challenges across web development. With experience in MERN stack, I dive into projects always pushing my limits. Whether it's building intelligent solutions or optimizing data flows, I'm constantly seeking growth and innovative ways to advance my skills.",
-      name: "Aditya Jain",
+      name: "Shravani Yadav",
       designation: "Student at MITWPU",
-      src: Aditya,
-      instagram: "https://www.instagram.com/theadityajain_",
-      linkedin: "https://www.linkedin.com/in/Theadityajain2010",
-      github: "https://github.com/TheAdityaJain",
+      src: Shravani ,
+      instagram: "https://www.instagram.com/yshravani12",
+      linkedin: "https://www.linkedin.com/in/shravani-yadav-a29955256/",
+      github: "",
     },
     {
       quote:
         "I love turning ideas into reality and making life just a bit easier, one line of code at a time. Leveraging my experience in Python, Full-Stack Development and IoT, I built this website to offer entertainment without the hassle.",
-      name: "Atharv Chinchkar",
+      name: "Rajlaxmi Shelke",
       designation: "Student at MITWPU",
-      src: Atharv,
-      instagram: "https://www.instagram.com/atharvchinckar",
-      linkedin: "https://www.linkedin.com/in/atharvchinckar",
-      github: "https://github.com/atharvchinckar",
+      src: Rajlaxmi,
+      instagram: "https://www.instagram.com/rajlaxmishelke_/",
+      linkedin: "https://www.linkedin.com/in/rajlaxmi-shelke-383b892b2/",
+      github: "",
     },
   ];
 
