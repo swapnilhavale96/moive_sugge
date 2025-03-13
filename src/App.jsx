@@ -15,11 +15,6 @@ function App() {
         <Route path="/about" element={<CreditsPage />} />
         <Route path="/video-player" element={<VideoPlayer />} />
       </Routes>
-      <div>
-      <h2>Meet the Creators</h2>
-      <img src="./assets/IMG_2432.JPG" alt="Profile Photo" />
-      <img src="./assets/raj.jpeg.JPG" alt="Profile Photo" />
-    </div>
     </>
   );
 }
