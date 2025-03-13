@@ -4,8 +4,8 @@ import { AnimatedTestimonials } from "./ui/animated-testimonials";
 import React from "react";
 
 export function CreditsPage() {
-  const Shravani  = new URL("/movie/public/IMG_2432.png", import.meta.url).href;
-  const Rajlaxmi = new URL("/movie/public/rajl.png", import.meta.url).href;
+  const Shravani  = new URL("/movie/src/assets/IMG_2432.jpeg", import.meta.url).href;
+  const Rajlaxmi = new URL("/movie/src/assets/raj.jpeg", import.meta.url).href;
 
   const testimonials = [
     {
